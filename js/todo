@@ -1,0 +1,19 @@
+disconnect the main plot thing
+
+
+
+histogram
+
+
+plot os and ds
+make a button for solve
+make inputs for vb, vs
+
+
+get ticks working
+
+clean up what you did with the dots
+pass the scales and height and such through the service
+get ride of all the vm. stuff. too much of a good thing! 
+
+use $scope to pass services into directives that contain a bunch of stuff, not vm.... (maybe?)

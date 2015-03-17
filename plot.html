@@ -1,0 +1,21 @@
+<svg ng-attr-width="{{SS.svgWidth}}" ng-attr-height="{{SS.svgHeight}}">
+  <g class='boilerplate' ng-attr-transform='translate({{SS.M.left}}, {{SS.M.top}})'>
+    <rect class='background' ng-attr-width="{{SS.width}}" ng-attr-height="{{SS.height}}"></rect>
+    <g class='y axis' y-axis w='SS.width' scale='SS.yScale'></g>
+    <g class='x axis' ex-axis h='SS.height' ng-attr-transform="translate(0,{{SS.height}})" scale='SS.xScale'></g>
+  </g>
+  <g ng-include class='main' src="template" ng-attr-transform='translate({{SS.M.left}}, {{SS.M.top}})'></g>
+</svg>
+
+<svg ng-attr-width="{{SS.svgWidth}}" ng-attr-height="{{SS.svgHeight}}">
+  <g class='boilerplate' ng-attr-transform='translate({{SS.M.left}}, {{SS.M.top}})'>
+    <rect class='background' ng-attr-width="{{SS.width}}" ng-attr-height="{{SS.height}}"></rect>
+    <g class='y axis' y-axis w='SS.width' scale='vm.scales2.y'></g>
+    <g class='x axis' ex-axis h='SS.height' ng-attr-transform="translate(0,{{SS.height}})" scale='vm.scales2.x'></g>
+  </g>
+  <g histogram-der class='main' scales="vm.scales2" height="SS.height" data="vm.helloData" ng-attr-transform='translate({{SS.M.left}}, {{SS.M.top}})'></g>
+</svg>
+
+<div style='padding: 10px;'>
+  <md-button class="md-raised md-primary" ng-click="vm.calc()">Calculate</md-button>
+</div>

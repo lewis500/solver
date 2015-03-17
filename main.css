@@ -1,0 +1,60 @@
+body {
+  /*font-family: 'Libre Baskerville', serif;*/
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+h1,h2,h3,h4,h5{
+	font-family: "PT Sans";
+}
+#content {
+  padding-left: 60px;
+  padding-right: 40px;
+  padding-top: 15px;
+  padding-bottom: 50px;
+  width: 55%;
+}
+p {
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.5em;
+}
+line, path {
+  pointer-events: none;
+}
+line {
+  fill: none;
+}
+.tick line {
+  stroke: white;
+  stroke-dasharray: 3, 1;
+}
+.axis path, .axis line {
+  fill: none;
+  shape-rendering: crispEdges;
+}
+rect.background {
+  fill: #EEEEEE;
+}
+.subway {
+  stroke: #E91E63;
+  stroke-width: 2px;
+}
+
+circle.dot{
+  fill: #E91E63;
+  cursor: pointer;
+}
+
+circle.mark{
+  fill: #AD1457;
+  stroke: none;
+}
+.experiment circle{
+  fill: green;
+}
+circle.lilDot{
+  fill: #03A9F4;
+  stroke: none;
+}
