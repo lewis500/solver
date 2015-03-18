@@ -20,8 +20,8 @@
       });
 
     TS.ticks
-      .forEach(function(O) {
-        TS.ticks.forEach(function(D) {
+      .forEach(function(O, i) {
+        TS.ticks.slice(i + 1).forEach(function(D) {
           TS.combos.push({
             O: O,
             D: D
@@ -40,14 +40,12 @@
     return TS;
 
     function euclid(a, b) {
-      return Math.pow(Math.pow(a.x - b.x, 2), Math.pow(a.y - b.y, 2), .5);
+      return Math.pow(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2), .5);
     }
-
 
     function updateTicks(C1, C2) {
       TS.yScale.range([C1.y, C2.y]);
       TS.xScale.range([C1.x, C2.x]);
-
 
       TS.ticks
         .forEach(function(d) {

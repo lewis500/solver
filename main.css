@@ -58,3 +58,6 @@ circle.lilDot{
   fill: #03A9F4;
   stroke: none;
 }
+rect.bar{
+  fill: #E91E63;
+}

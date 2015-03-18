@@ -17,8 +17,8 @@
       this.O = O;
       this.D = D;
       this.res = {
-        D: manhattan(O, D),
-        T: manhattan(O, D) / vars.vB,
+        D: 0,
+        T: 0,
         Dp: 0,
         Tp: 0,
         Dpp: 0,
@@ -57,7 +57,9 @@
       _.assign(self.res, {
         Tp: res.time,
         Dp: res.dist,
-        combo: res.combo
+        combo: res.combo,
+        D: manhattan(self.D, self.O),
+        T: manhattan(self.D, self.O) / vars.vB
       });
     }
 

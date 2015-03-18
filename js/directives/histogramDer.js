@@ -23,28 +23,23 @@
       var bars;
       var x = vm.scales.x;
       var y = vm.scales.y;
-      start();
 
       scope.$on('windowResize', update);
-      // scope.$on('recalc', update);
-      // $scope.$broadcast('tickChange');
-
-      function start() {
-        // histo.bins(vm.scales.x.ticks(20));
-        bars = sel.selectAll('.bar')
-          .data(d3.range(20))
-          .enter().append('rect.bar')
-          .attr("x", 1)
-
-      }
 
       function update() {
         var data = vm.data;
-        bars.data(data)
-          .attr("transform", function(d) {
-            return "translate(" + x(d.x) + "," + y(d.y) + ")";
+        var w = x(data[0].dx) - x(0);
+        var bars = sel.selectAll('.bar')
+          .data(data)
+
+        bars.enter()
+          .append('rect.bar')
+          .attr("x", 1)
+
+        bars.attr("transform", function(d) {
+            return "translate(" + x(d.x) + "," + Math.min(y(d.y), vm.height) + ")";
           })
-          .attr("width", x(data[0].dx) - 1)
+          .attr("width", w - 1)
           .attr("height", function(d) {
             return vm.height - y(d.y);
           });

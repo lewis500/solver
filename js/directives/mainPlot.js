@@ -43,9 +43,10 @@
       $scope.SS = sizeService;
       $scope.TS = tickService;
       $scope.DS = dataService;
-      var histo = d3.layout.histogram().value(function(d) {
-        return d.res.Tp;
-      }).frequency(false);
+      var histo = d3.layout.histogram()
+        .value(function(d) {
+          return d.res.Tp - d.res.T;
+        }).frequency(false);
 
       $scope.$watch(function(d) {
         return vars.vB + vars.vS;
@@ -54,13 +55,17 @@
       });
 
       vm.calc = _.throttle(function() {
-        histo.bins(vm.scales.x.ticks(20));
-        var data = histo(dataService.ODs);
         dataService.calc();
-        vm.scales2.y
-          .domain(d3.extent(data, function(d) {
-            return d.y;
+        vm.scales2.x
+          .domain(d3.extent(dataService.ODs, function(d) {
+            return d.res.Tp - d.res.T;
           }));
+        histo.bins(vm.scales2.x.ticks(20));
+        var data = histo(dataService.ODs);
+        vm.scales2.y
+          .domain([0, d3.max(data, function(d) {
+            return d.y;
+          })]);
         vm.helloData = data;
         $scope.$broadcast('recalc');
         $scope.$broadcast('windowResize');
@@ -71,7 +76,7 @@
       };
       vm.scales2 = {
         y: d3.scale.linear().domain([0, .2]),
-        x: d3.scale.linear().domain([0, 100])
+        x: d3.scale.linear()
       };
       vm.C1 = {
         x: 30,
@@ -96,7 +101,6 @@
 
       function updateTicks() {
         tickService.updateTicks(vm.C1, vm.C2);
-
         $scope.$broadcast('tickChange');
         vm.calc();
       }
@@ -123,8 +127,6 @@
     };
 
     return directive;
-
-
   }
 
 })(angular);
