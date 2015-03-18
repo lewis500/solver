@@ -1,32 +1,35 @@
 (function() {
-  angular.module('mainApp').directive('yAxis', YAxis);
+    angular.module('mainApp').directive('yAxis', YAxis);
 
-  function YAxis() {
-    var directive = {
-      link: link,
-      restrict: 'A',
-      scope: {
-        width: '=w',
-        scale: '=scale'
-      }
-    };
+    function YAxis() {
+        var directive = {
+            link: link,
+            restrict: 'A',
+            scope: {
+                width: '=w',
+                scale: '=scale'
+            }
+        };
 
-    return directive;
+        return directive;
 
-    function link(scope, el, attr) {
-      var axisFun = d3.svg.axis()
-        .scale(scope.scale)
-        .ticks(5)
-        .orient("left");
-      var sel = d3.select(el[0]).call(axisFun);
-      scope.$on('windowResize', fire);
-      fire();
+        function link(scope, el, attr) {
+            var axisFun = d3.svg.axis()
+                .scale(scope.scale)
+                .ticks(5)
+                .orient("left");
 
-      function fire() {
-        axisFun.tickSize(-scope.width);
-        sel.call(axisFun);
-      }
+            var sel = d3.select(el[0])
+
+            scope.$on('windowResize', fire);
+
+            fire();
+
+            function fire() {
+                axisFun.tickSize(-scope.width);
+                sel.call(axisFun);
+            }
+        }
     }
-  }
 
 })();

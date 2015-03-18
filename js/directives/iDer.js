@@ -16,12 +16,12 @@
     return directive;
 
     function link(scope, el, attr, vm) {
-      var dots = d3.select(el[0]).selectAll('lilDot')
+      var dots = d3.select(el[0])
+        .selectAll('lilDot')
         .data(vm.data)
         .enter()
         .append('circle.lilDot')
-        .attr('r', 1)
-
+        .attr('r', 1);
 
       function update() {
         dots.translate(function(d) {

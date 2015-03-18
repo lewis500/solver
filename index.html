@@ -7,13 +7,11 @@
   <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
   <link rel="stylesheet" href="main.css">
-
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], skipTags: ["script","noscript","style","textarea","code"] } });
   </script>
   <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
-
 </head>
 
 <body ng-app="mainApp" ng-init="triggerResize()">
@@ -23,10 +21,11 @@
   <div id="content">
     <div inputs-der></div>
     <br>
-    <div class='md-whiteframe-z1'>
-      <main-plot style='width: 100%' template="special.html" template2="templates/histogram.html"> </main-plot>
-    </div>
+    <div class='md-whiteframe-z1' map-plot-der></div>
+    <br>
+    <!-- <div class='md-whiteframe-z1' histogram-der></div> -->
   </div>
+  <!-- bring in scripts -->
   <script src="bower_components/d3/d3.js" charset="utf-8"></script>
   <script src="js/d3-jetpack.js" charset="utf-8"></script>
   <script src="bower_components/angular/angular.min.js"></script>
@@ -34,7 +33,6 @@
   <script src="/bower_components/angular-aria/angular-aria.js"></script>
   <script src="/bower_components/angular-animate/angular-animate.js"></script>
   <script src="/bower_components/angular-material/angular-material.js"></script>
-
   <script>
   var ID = (function() {
     var id = 0;
@@ -53,13 +51,15 @@
     .config(function($mdThemingProvider) {
       $mdThemingProvider.theme('default')
         .primaryPalette('light-blue')
-    })
+    });
   </script>
-    <script src='js/services/varsService.js'></script>
+  <script src='js/services/varsService.js'></script>
   <script src='js/services/dataService.js'></script>
   <script src='js/services/ODService.js'></script>
   <script src='js/services/tickService.js'></script>
-  <script src='js/directives/mainPlot.js'></script>
+  <script src='js/directives/barsDer.js'></script>
+  <script src='js/directives/mapDer.js'></script>
+  <script src='js/directives/plotDer.js'></script>
   <script src='js/directives/histogramDer.js'></script>
   <script src='js/directives/xAxis.js'></script>
   <script src='js/directives/yAxis.js'></script>
@@ -67,8 +67,6 @@
   <script src='js/directives/dotDer.js'></script>
   <script src='js/directives/inputsDer.js'></script>
   <script src='js/directives/iDer.js'></script>
-
-
 </body>
 
 </html>

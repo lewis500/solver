@@ -7,7 +7,7 @@
       combos: [],
       ticks: [],
       numTicks: 25,
-      updateTicks: updateTicks
+      update: update
     };
 
     TS.ticks = _.range(0, TS.numTicks)
@@ -43,7 +43,7 @@
       return Math.pow(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2), .5);
     }
 
-    function updateTicks(C1, C2) {
+    function update(C1, C2) {
       TS.yScale.range([C1.y, C2.y]);
       TS.xScale.range([C1.x, C2.x]);
 

@@ -1,5 +1,10 @@
 REFACTOR
+screw the whole watching the element thing. just do a window resize event
 
+
+remake the templates
+
+have the axes functions watch the range/domain
 
 
 disconnect the main plot thing

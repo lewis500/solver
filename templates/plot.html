@@ -1,0 +1,8 @@
+<svg ng-init="plt.resize()" ng-attr-width="{{plt.width + plt.m.left + plt.m.right}}" ng-attr-height="{{plt.height + plt.m.top + plt.m.bottom}}">
+  <g class='boilerplate' ng-attr-transform='translate({{plt.m.left}}, {{plt.m.top}})'>
+    <rect class='background' ng-attr-width="{{plt.width}}" ng-attr-height="{{plt.height}}"></rect>
+    <g class='y axis' y-axis w='plt.width' scale='plt.scales.y'></g>
+    <g class='x axis' ex-axis h='plt.height' ng-attr-transform="translate(0,{{plt.height}})" scale='plt.scales.x'></g>
+  </g>
+  <g ng-transclude ng-attr-transform='translate({{plt.m.left}}, {{plt.m.top}})'></g>
+</svg>

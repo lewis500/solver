@@ -1,42 +1,43 @@
 (function() {
 
-    angular.module('mainApp')
-        .directive('plotDer', plotDer)
-        .controller('plotDerCtrl', plotDerCtrl);
+  angular.module('mainApp')
+    .directive('plotDer', plotDer)
 
-    function plotDerCtrl($scope, $element, $window) {
-            var vm = this;
-            var par = $element.parent()[0];
+  function plotDer() {
+    var directive = {
+      controller: controller,
+      templateNamespace: 'svg',
+      templateUrl: 'templates/plot.html',
+      controllerAs: 'plt',
+      bindToController: true,
+      transclude: true,
+      scope: {
+        m: '=',
+        scales: '=',
+        aspectRatio: '='
+      }
+    };
 
-            $scope.$watch(function() {
-                return par.clientWidth;
-            }, resize);
+    return directive;
 
-            function resize(w) {
-                vm.width = w;
-                vm.height = w * vm.aspectRatio;
-                vm.scales.x.range([0, w]);
-                vm.scales.y.range([vm.height, 0]);
-            }
-        } //end controller
+    function controller($scope, $element, $window) {
+        var plt = this;
+        plt.resize = resize;
+        var par = $element.parent()[0];
 
-    function plotDer() {
-        var directive = {
-            controller: 'plotDerCtrl',
-            templateNamespace: 'svg',
-            templateUrl: 'plot2.html',
-            controllerAs: 'vm',
-            bindToController: true,
-            scope: {
-                M: '=',
-                scales: '=',
-                template: '=',
-                aspectRatio: '='
-            }
-        };
+        angular.element($window).bind('resize', plt.resize);
 
-        return directive;
-    }
+        function resize() {
+          var w = par.clientWidth;
+          plt.width = w - plt.m.left - plt.m.right;
+          plt.height = w * plt.aspectRatio - plt.m.top - plt.m.bottom;
+          plt.scales.x.range([0, w]);
+          plt.scales.y.range([plt.height, 0]);
+          $scope.$apply();
+          $scope.$broadcast('windowResize');
+        }
+      } //end controller
 
+  }
 
 })();

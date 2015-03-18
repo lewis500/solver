@@ -5,6 +5,9 @@
     var directive = {
       restrict: 'A',
       link: link,
+      controller: angular.noop,
+      bindToController: true,
+      controllerAs: 'vm',
       scope: {
         data: '=',
         scales: '='
@@ -12,17 +15,18 @@
     };
     return directive;
 
-    function link(scope, el, attr) {
-      var tickSel = d3.select(el[0]).selectAll('marks')
-        .data(scope.data)
+    function link(scope, el, attr, vm) {
+      var tickSel = d3.select(el[0])
+        .selectAll('marks')
+        .data(vm.data)
         .enter()
         .append('circle.mark')
         .attr('r', 1.5);
 
       function update() {
-        tickSel.data(scope.data)
+        tickSel.data(vm.data)
           .translate(function(d) {
-            return [scope.scales.x(d.x), scope.scales.y(d.y)];
+            return [vm.scales.x(d.x), vm.scales.y(d.y)];
           });
       }
 

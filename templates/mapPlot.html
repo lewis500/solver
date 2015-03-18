@@ -1,0 +1,7 @@
+<plot-der style='width: 100%' m='vm.margin' scales='vm.scales' aspect-ratio='0.75'>
+  <g i-der data="vm.dataService.array" scales="vm.scales"></g>
+  <line class='subway' ng-attr-x1='{{vm.scales.x(vm.C1.x)}}' ng-attr-y1='{{vm.scales.y(vm.C1.y)}}' ng-attr-x2='{{vm.scales.x(vm.C2.x)}}' ng-attr-y2='{{vm.scales.y(vm.C2.y)}}'></line>
+  <g ticks-der scales="vm.scales" data="vm.tickService.ticks"></g>
+  <dot-der data="vm.C1" drag-dot='vm.dragDot' scales="vm.scales"></dot-der>
+  <dot-der data="vm.C2" drag-dot='vm.dragDot' scales="vm.scales"></dot-der>
+</plot-der>

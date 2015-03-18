@@ -6,7 +6,7 @@
   function dataService(tickService, vars, OD) {
     var DS = {
       ODs: [],
-      calc: calc,
+      update: update,
       X: 10,
       Y: 10,
       array: []
@@ -17,7 +17,7 @@
 
     return DS;
 
-    function calc() {
+    function update() {
       DS.ODs
         .forEach(function(d) {
           d.solve();
