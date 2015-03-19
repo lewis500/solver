@@ -6,6 +6,7 @@
   function inputCtrl($scope, vars) {
     var vm = this;
     $scope.vars = vars;
+
   }
 
 

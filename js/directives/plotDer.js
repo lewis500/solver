@@ -11,7 +11,7 @@
 
       angular.element($window)
         .bind('resize', function() {
-          $scope.$evalAsync(plt.resize);
+          $scope.$apply(plt.resize);
         });
 
       function resize() {
@@ -20,7 +20,9 @@
         plt.height = w * plt.aspectRatio - plt.m.top - plt.m.bottom;
         plt.scales.x.range([0, plt.width]);
         plt.scales.y.range([plt.height, 0]);
-        $scope.$broadcast('windowResize');
+        plt.scales.x.change++;
+        plt.scales.y.change++;
+        // $scope.$broadcast('windowResize');
       }
     } //end controller
 

@@ -7,7 +7,7 @@
   function mapPlotDer() {
     var directive = {
       controller: 'mapPlotCtrl',
-      templateUrl: "templates/mapPlot.html",
+      templateUrl: "templates/map.html",
       controllerAs: 'vm',
       bindToController: true,
       restrict: 'A',
@@ -18,13 +18,15 @@
     return directive;
   }
 
-  function mapPlotCtrl($scope, $rootScope, tickService, dataService) {
+  function mapPlotCtrl($scope, $rootScope, tickService, dataService, vars) {
     var vm = this;
     vm.scope = $scope;
     vm.scales = {
       x: d3.scale.linear().domain([0, 100]),
       y: d3.scale.linear().domain([0, 100])
     };
+    vm.scales.x.change = 0;
+    vm.scales.y.change = 0;
 
     vm.margin = {
       top: 25,
@@ -35,6 +37,7 @@
 
     vm.tickService = tickService;
     vm.dataService = dataService;
+    vm.vars = vars;
 
     vm.C1 = {
       x: 30,
@@ -45,17 +48,19 @@
       x: 50,
       y: 50
     };
-
+    vm.dragDot = dragDot;
     vm.update = update;
+
+    $scope.$watch('vm.vars.vB + vm.vars.vS', function() {
+      vm.update();
+    });
 
     function update() {
       tickService.update(vm.C1, vm.C2);
       dataService.update();
       $scope.$broadcast('tickChange');
       vm.histUpdate();
-    };
-
-    vm.dragDot = dragDot;
+    }
 
     function dragDot(dotDatum, newX, newY) {
       _.assign(dotDatum, {

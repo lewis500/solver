@@ -18,23 +18,23 @@
       var sel = d3.select(el[0]);
       var x = vm.scales.x;
       var y = vm.scales.y;
-      scope.$on('windowResize', update);
-      // scope.$watch('vm.data[0].y', update);
+      scope.$watch('vm.scales.x.change + vm.scales.y.change', update);
+      scope.$watch('vm.data[0].y', update);
+
+      var bars = sel.selectAll('.bar')
+        .data(d3.range(20)).enter()
+        .append('rect.bar')
+        .attr("x", 1);
+      // update();
 
       function update() {
         var data = vm.data;
         if (!data.length > 0) return;
-        var bars = sel.selectAll('.bar')
-          .data(vm.data);
-
-        bars.enter()
-          .append('rect.bar')
-          .attr("x", 1);
-
+        bars.data(data)
         var w = x(data[0].dx) - x(0);
         var height = y.range()[0];
 
-        bars.attr({
+        bars.transition().attr({
           transform: function(d) {
             return "translate(" + x(d.x) + "," + y(d.y) + ")";
           },

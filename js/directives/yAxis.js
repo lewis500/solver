@@ -1,35 +1,40 @@
 (function() {
-    angular.module('mainApp').directive('yAxis', YAxis);
+  angular.module('mainApp').directive('yAxis', YAxis);
 
-    function YAxis() {
-        var directive = {
-            link: link,
-            restrict: 'A',
-            scope: {
-                width: '=w',
-                scale: '=scale'
-            }
-        };
+  function YAxis() {
+    var directive = {
+      link: link,
+      restrict: 'A',
+      controller: angular.noop,
+      bindToController: true,
+      controllerAs: 'vm',
+      scope: {
+        width: '=w',
+        scale: '=scale'
+      }
+    };
 
-        return directive;
+    return directive;
 
-        function link(scope, el, attr) {
-            var axisFun = d3.svg.axis()
-                .scale(scope.scale)
-                .ticks(5)
-                .orient("left");
+    function link(scope, el, attr, vm) {
+      var axisFun = d3.svg.axis()
+        .scale(vm.scale)
+        .ticks(5)
+        .orient("left");
 
-            var sel = d3.select(el[0])
+      var sel = d3.select(el[0])
 
-            scope.$on('windowResize', fire);
+      // scope.$on('windowResize', fire);
 
-            fire();
+      scope.$watch('vm.scale.change', fire);
 
-            function fire() {
-                axisFun.tickSize(-scope.width);
-                sel.call(axisFun);
-            }
-        }
+      fire();
+
+      function fire() {
+        axisFun.tickSize(-vm.width);
+        sel.call(axisFun);
+      }
     }
+  }
 
 })();

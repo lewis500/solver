@@ -30,8 +30,7 @@
       }
 
       update();
-
-      scope.$on('windowResize', update);
+      scope.$watch('vm.scales.x.change + vm.scales.y.change', update);
 
     }
 

@@ -6,10 +6,9 @@
 
     var OD = {
       init: init,
-      solve: solve
+      solve: solve,
+      tickService: tickService
     };
-
-    OD.constructor = "OD";
 
     return OD;
 
@@ -21,8 +20,6 @@
         T: 0,
         Dp: 0,
         Tp: 0,
-        Dpp: 0,
-        Tpp: 0,
         combo: {}
       };
     }
@@ -40,7 +37,7 @@
           time: 1000,
           combo: null
         };
-      tickService
+      self.tickService
         .combos
         .forEach(function(v) {
           var d0 = manhattan(O, v.O),

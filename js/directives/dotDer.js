@@ -24,7 +24,7 @@
         scope.$apply(function() {
           scope.dragDot(scope.data, x, y);
         });
-      }, 250);
+      }, 100);
 
       var drag = d3.behavior.drag()
         .on('drag', function() {

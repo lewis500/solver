@@ -7,6 +7,7 @@
     var DS = {
       ODs: [],
       update: update,
+      // update2: update2,
       X: 6,
       Y: 6,
       array: []
