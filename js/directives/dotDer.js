@@ -6,26 +6,31 @@
     var directive = {
       link: link,
       templateNamespace: 'svg',
-      template: "<circle ng-attr-transform='translate({{vm.scales.x(vm.data.x)}},{{vm.scales.y(vm.data.y)}})' class='dot' r='6'></circle>",
+      template: "<circle ng-attr-transform='translate({{scales.x(data.x)}},{{scales.y(data.y)}})' class='dot' r='6'></circle>",
       replace: true,
-      controller: angular.noop,
-      bindToController: true,
-      controllerAs: 'vm',
       scope: {
         dragDot: '=',
         data: '=',
-        scales: '='
+        scales: '=',
+        histUpdate: '='
       }
     };
     return directive;
 
-    function link(scope, el, attr, vm) {
+    function link(scope, el, attr) {
       var sel = d3.select(el[0]);
 
+      var dragger = _.throttle(function(x, y) {
+        scope.$apply(function() {
+          scope.dragDot(scope.data, x, y);
+        });
+      }, 250);
 
       var drag = d3.behavior.drag()
-        .on('drag', function(d, i) {
-          vm.dragDot(vm.data, d3.event.x, d3.event.y);
+        .on('drag', function() {
+          var x = d3.event.x,
+            y = d3.event.y;
+          dragger(x, y);
         });
 
       sel.call(drag);

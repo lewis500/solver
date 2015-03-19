@@ -10,7 +10,10 @@
       templateUrl: "templates/mapPlot.html",
       controllerAs: 'vm',
       bindToController: true,
-      restrict: 'A'
+      restrict: 'A',
+      scope: {
+        histUpdate: '='
+      }
     };
     return directive;
   }
@@ -43,13 +46,18 @@
       y: 50
     };
 
-    vm.update = function() {
+    vm.update = update;
+
+    function update() {
       tickService.update(vm.C1, vm.C2);
       dataService.update();
       $scope.$broadcast('tickChange');
+      vm.histUpdate();
     };
 
-    vm.dragDot = function(dotDatum, newX, newY) {
+    vm.dragDot = dragDot;
+
+    function dragDot(dotDatum, newX, newY) {
       _.assign(dotDatum, {
         x: vm.scales.x.invert(newX),
         y: vm.scales.y.invert(newY)

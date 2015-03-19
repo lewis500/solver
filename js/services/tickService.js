@@ -6,7 +6,7 @@
     var TS = {
       combos: [],
       ticks: [],
-      numTicks: 25,
+      numTicks: 10,
       update: update
     };
 

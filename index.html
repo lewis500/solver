@@ -14,16 +14,16 @@
   </script>
 </head>
 
-<body ng-app="mainApp" ng-init="triggerResize()">
+<body ng-app="mainApp">
   <md-toolbar layout='row' style='padding-left: 20px'>
     <h2 flex='66'>Route Solver</h2>
   </md-toolbar>
   <div id="content">
     <div inputs-der></div>
     <br>
-    <div class='md-whiteframe-z1' map-plot-der></div>
+    <div class='md-whiteframe-z1' map-plot-der hist-update="hist.update"></div>
     <br>
-    <!-- <div class='md-whiteframe-z1' histogram-der></div> -->
+    <div class='md-whiteframe-z1' histogram-der></div>
   </div>
   <!-- bring in scripts -->
   <script src="bower_components/d3/d3.js" charset="utf-8"></script>
@@ -57,9 +57,9 @@
   <script src='js/services/dataService.js'></script>
   <script src='js/services/ODService.js'></script>
   <script src='js/services/tickService.js'></script>
-  <script src='js/directives/barsDer.js'></script>
   <script src='js/directives/mapDer.js'></script>
   <script src='js/directives/plotDer.js'></script>
+  <script src='js/directives/barsDer.js'></script>
   <script src='js/directives/histogramDer.js'></script>
   <script src='js/directives/xAxis.js'></script>
   <script src='js/directives/yAxis.js'></script>
