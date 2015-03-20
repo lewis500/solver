@@ -5,3 +5,12 @@
   <dot-der data="vm.C1" drag-dot='vm.dragDot' scales="vm.scales"></dot-der>
   <dot-der data="vm.C2" drag-dot='vm.dragDot' scales="vm.scales"></dot-der>
 </plot-der>
+<div layout='row'>
+  <div >
+    <md-button class='md-primary md-raised' style="margin-top:15%; margin-left: 10px;" ng-click="vm.download()">Download</md-button>
+  </div>
+  <md-input-container style='margin-left: 10%'>
+    <label>File Name</label>
+    <input ng-model="vm.fileName">
+  </md-input-container>
+</div>

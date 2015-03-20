@@ -7,10 +7,9 @@
     var DS = {
       ODs: [],
       update: update,
-      // update2: update2,
-      X: 6,
-      Y: 6,
-      array: []
+      X: 10,
+      Y: 10,
+      updateArray: updateArray
     };
 
     DS.array = makeArray();
@@ -19,19 +18,27 @@
     return DS;
 
     function update() {
-      DS.ODs
-        .forEach(function(d) {
-          d.solve();
-        });
+      DS.ODs.forEach(function(d) {
+        d.solve();
+      });
+    }
+
+    function updateArray() {
+      DS.array.forEach(function(d, i) {
+        d.x = d.col * vars.X / DS.X;
+        d.y = d.row * vars.Y / DS.Y;
+      });
     }
 
     function makeArray() {
       var res = [];
-      _.range(DS.X).forEach(function(x) {
-        _.range(DS.Y).forEach(function(y) {
+      _.range(DS.X + 1).forEach(function(x) {
+        _.range(DS.Y + 1).forEach(function(y) {
           res.push({
-            x: x * Math.round(vars.xMax / DS.X),
-            y: y * Math.round(vars.yMax / DS.Y)
+            col: x,
+            row: y,
+            x: x * vars.X / DS.X,
+            y: y * vars.Y / DS.Y
           });
         });
       });

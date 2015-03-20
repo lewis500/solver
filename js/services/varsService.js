@@ -1,11 +1,12 @@
 (function() {
 
-  angular.module('mainApp').factory('vars', vars);
+  angular.module('mainApp')
+    .factory('vars', vars);
 
   function vars() {
     var V = {
-      xMax: 100,
-      yMax: 100,
+      X: 100,
+      Y: 100,
       vB: 2,
       vS: 2
     };
